@@ -17,7 +17,7 @@ class Api::V1::DestinationsController < ActionController::API
   end
 
   def destroy
-    render json: Destination.find(params[:id]).destroy
+    Destination.find(params[:id]).destroy
   end
 
   private
