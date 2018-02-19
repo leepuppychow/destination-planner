@@ -8,4 +8,22 @@ class Api::V1::DestinationsController < ActionController::API
     render json: Destination.find(params[:id])
   end
 
+  def create
+    render json: Destination.create(destination_params)
+  end
+
+  def update
+    render json: Destination.find(params[:id]).update(destination_params)
+  end
+
+  def destroy
+    render json: Destination.find(params[:id]).destroy
+  end
+
+  private
+
+    def destination_params
+      params.require(:destination).permit(:name, :zip, :description, :image_url)
+    end
+
 end

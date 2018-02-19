@@ -21,8 +21,46 @@ describe "Destinations API" do
       expect(destination.class).to eq Hash
       expect(destination["name"]).to eq "Denver"
     end
+  end
 
+  context "POST requests" do
+    it "can create a new destination" do
+      destination_params = {name: "Taipei",
+                            zip: "Idunno",
+                            description: "family",
+                            image_url: "blank"}
 
+      post "/api/v1/destinations", params: {destination: destination_params}
+      destination = Destination.last
+      expect(response).to be_success
+      expect(destination.name).to eq "Taipei"
+    end
+  end
+
+  context "PUT/PATCH requests" do
+    it "can update an existing destination" do
+      place1 = create(:destination)
+      destination_params = {name: "Taipei",
+                            zip: "Idunno"}
+
+      expect(place1.name).to eq "Denver"
+      patch "/api/v1/destinations/#{place1.id}", params: {destination: destination_params}
+      expect(response).to be_success
+      updated = Destination.find(place1.id)
+      expect(updated.name).to eq "Taipei"
+    end
+  end
+
+  context "DELETE requests" do
+    it "can delete an existing destination" do
+      place1,place2 = create_list(:destination, 2)
+
+      expect(Destination.count).to eq 2
+
+      delete "/api/v1/destinations/#{place1.id}"
+      expect(response).to be_success
+      expect(Destination.count).to eq 1
+    end
   end
 
 end
