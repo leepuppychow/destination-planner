@@ -10,6 +10,7 @@ class DestinationsController < ApplicationController
   # GET /destinations/1
   # GET /destinations/1.json
   def show
+    @forecast = ForecastService.new(@destination.zip).forecast
   end
 
   # GET /destinations/new
