@@ -1,4 +1,4 @@
-class Api::V1::DestinationsController < ActionController::API
+class Api::V1::DestinationsController < ApiController
 
   def index
     render json: Destination.all
