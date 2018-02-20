@@ -24,6 +24,9 @@ describe "Destinations API" do
   end
 
   context "POST requests" do
+    #note that params in url would appear like:
+    #/destinations?destination[name]=blerg&destination[zip]=47621
+
     it "can create a new destination" do
       destination_params = {name: "Taipei",
                             zip: "Idunno",
@@ -39,6 +42,9 @@ describe "Destinations API" do
 
   context "PUT/PATCH requests" do
     it "can update an existing destination" do
+      #note that params in url would appear like:
+      #/destinations?destination[name]=blerg&destination[zip]=47621
+
       place1 = create(:destination)
       destination_params = {name: "Taipei",
                             zip: "Idunno"}
