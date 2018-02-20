@@ -4,10 +4,8 @@ class ForecastService
     @zip = zip
   end
 
-  def forecast
-    body[:forecast][:simpleforecast][:forecastday].map do |day|
-      ForecastDayService.new(day)
-    end
+  def weather_data
+    get_json[:forecast][:simpleforecast][:forecastday]
   end
 
   private
@@ -16,7 +14,7 @@ class ForecastService
       Faraday.get("http://api.wunderground.com/api/#{ENV['weather_api_key']}/forecast10day/q/#{@zip}.json")
     end
 
-    def body
+    def get_json
       JSON.parse(response.body, symbolize_names: true)
     end
 

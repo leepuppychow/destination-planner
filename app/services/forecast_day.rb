@@ -1,4 +1,4 @@
-class ForecastDayService
+class ForecastDay
 
   def initialize(day_attributes)
     @day_attributes = day_attributes
